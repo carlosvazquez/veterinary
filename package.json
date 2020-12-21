@@ -1,0 +1,17 @@
+{
+  "name": "app_nude_unir",
+  "version": "1.0.0",
+  "description": "Esta app corresponde a la maestría de Direción e Ingeniería de Sitios Web",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cowsay": "^1.4.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1"
+  }
+}
