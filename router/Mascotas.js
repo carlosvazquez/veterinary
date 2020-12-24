@@ -18,7 +18,71 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/crear', (req, res) => {
+    res.render('crear')
+})
 
+router.post('/', async (req, res) => {
+    const body = req.body
+    try {
+        const mascotaDB = new Mascota(body)
+        await mascotaDB.save()
+
+        res.redirect('/mascotas')
+       
+    } catch (error) {
+        console.log('error', error)
+    }
+})
+
+router.get('/:id', async(req, res) => {
+    
+    const id = req.params.id
+    
+    try {
+        
+        const mascotaDB = await Mascota.findOne({ _id: id })
+        console.log(mascotaDB)
+       
+        res.render('detalle', {
+            mascota: mascotaDB,
+            error: false
+        })
+
+    } catch (error) {
+        console.log(error)
+        res.render('detalle', {
+            error: true,
+            mensaje: 'No se encuentra el id de la mascota selecionada'
+        })
+    }
+})
+
+router.delete('/:id', async (req, res) => {
+    const id = req.params.id;
+    console.log('id desde backend', id)
+    try {
+
+        const mascotaDB = await Mascota.findByIdAndDelete({ _id: id });
+        console.log(mascotaDB)
+
+        // res.redirect('/mascotas')
+        if (mascotaDB) {
+            res.json({
+                estado: true,
+                mensaje: 'No se puede eliminar'
+            })
+        } else {
+            res.json({
+                estado: false,
+                mensaje: 'eliminado'
+            })
+        }
+        
+    } catch (error) {
+        console.log(error)
+    }
+})
 
 
 module.exports = router;

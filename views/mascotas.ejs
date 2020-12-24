@@ -3,6 +3,16 @@
     
 <div class="container">
 
+    <h1> CRUD Mascotas</h1>
+
+    <a 
+      class="btn btn-success btn-block my-4"
+      href="/mascotas/crear"
+    >
+      Crear nueva mascota
+      </a>
+
+
     <table class="table">
         <thead>
           <tr>
@@ -21,7 +31,15 @@
                         <th scope="row"><%= mascota.id %> </th>
                         <td><%= mascota.nombre %> </th></td>
                         <td><%= mascota.descripcion %> </th></td>
-                        <td>@mdo</td>
+                        <td>
+                          <a 
+                              href="mascotas/<%= mascota.id %>"
+                              class="btn btn-warning btn-sm"
+                              
+                          >
+                              Editar  
+                        </a>
+                      </td>
                     </tr>
                      
                 <% }) %>
