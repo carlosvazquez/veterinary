@@ -21,7 +21,7 @@ const mongoose = require('mongoose');
 const user = 'alfonsomartinez';
 const password = 'Q3rIiE5oY8nEHEtK';
 const dbname = 'veterinaria'
-const uri = `mongodb+srv://${user}:${password}@cluster0.fn8j8.mongodb.net/${dbname}?retryWrites=true&w=majority`
+const uri = `mongodb+srv://${user}:${password}@cluster0.r88xj.mongodb.net/${dbname}?retryWrites=true&w=majority`
 
 mongoose.connect(uri, 
   { useNewUrlParser: true, useUnifiedTopology: true }
