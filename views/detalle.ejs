@@ -14,24 +14,37 @@
         </a>
     <% } %>
 
-    <% if (!error) { %>
-        <table class="table">
-            <thead>
-                <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nombre</th>
-                <th scope="col">Descripción</th>
-                <th scope="col">Acción</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row"><%= mascota.id %></th>
-                    <td><%= mascota.nombre %> </td>
-                    <td><%= mascota.descripcion %></td>
+   
+        <% if (!error) { %>
+            <form id="formularioEditar" data-id="<%= mascota.id %>">
+                <input 
+                    type="text"
+                    value="<%= mascota.nombre %>"
+                    class="form-control my-2"
+                    name="nombre"
+                    id="nombreInput"
+                >
+                <input 
+                    type="text"
+                    value="<%= mascota.descripcion %>"
+                    class="form-control my-2"
+                    name="descripcion"
+                    id="descripcionInput"
+                >
+                <button
+                    class="btn btn-warning btn-block"
+                    type="submit"
+                   
+                >
+                    Editar
+                </button>
+            </form>
+            <hr>
+                    <tr>
+   
                     <td>
                         <button
-                        class="btn btn-danger btn-sm"
+                        class="btn btn-danger btn-sm mt-5"
                         id="btnEliminar"
                         data-id="<%= mascota.id %>"
 
@@ -41,8 +54,7 @@
                     </td>
                 </tr>
             </tbody>
-        </table>
-    <% } %>
+          <% } %>
      
   </div>
     
@@ -53,6 +65,7 @@
     const btnEliminar = document.querySelector('.btn-danger')
       btnEliminar.addEventListener('click', async() => {
         console.log(btnEliminar.dataset.id)  
+        
         try {
             
             const data = await fetch(`/mascotas/${btnEliminar.dataset.id}`, {
@@ -69,5 +82,40 @@
             console.log(error)
         }
       })
+    
+      
+   const formularioEditar = document.querySelector('#formularioEditar');
+
+    formularioEditar.addEventListener('submit', async(e) => {
+    e.preventDefault()
+
+   
+    const nombre = formularioEditar.elements['nombre'].value
+    const descripcion = document.querySelector('#descripcionInput').value
+    const id = formularioEditar.dataset.id 
+
+    try {
+        const data = await fetch(`/mascotas/${id}`, {
+            method: 'put',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+                
+            body: JSON.stringify ({nombre: nombre, descripcion: descripcion})
+        })
+        const res = await data.json()
+       
+        if(res.estado){
+            window.location.href = '/mascotas'
+        }else{
+            console.log(res)
+         }
+
+    } catch (error) {
+            console.log(error)
+        }      
+   
+
+})
     
     </script>
