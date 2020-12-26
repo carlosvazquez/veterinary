@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-require('dotenv'). config()
+require('dotenv'). config
 
 const port = process.env.PORT || 4000;
 app.use(express.static(__dirname + "/public"));
