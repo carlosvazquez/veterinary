@@ -13,7 +13,6 @@ router.get('/', async (req, res) => {
 
         res.render("mascotas", {
             arrayMascotas: arrayMascotasDB
-            
         })
     } catch (error) {
         console.log(error)
@@ -31,21 +30,21 @@ router.post('/', async (req, res) => {
         await mascotaDB.save()
 
         res.redirect('/mascotas')
-       
+
     } catch (error) {
         console.log('error', error)
     }
 })
 
 router.get('/:id', async(req, res) => {
-    
+
     const id = req.params.id
-    
+
     try {
-        
+
         const mascotaDB = await Mascota.findOne({ _id: id })
         console.log(mascotaDB)
-       
+
         res.render('detalle', {
             mascota: mascotaDB,
             error: false
@@ -80,7 +79,7 @@ router.delete('/:id', async (req, res) => {
                 mensaje: 'eliminado'
             })
         }
-        
+
     } catch (error) {
         console.log(error)
     }
@@ -89,7 +88,7 @@ router.delete('/:id', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const id = req.params.id;
     const body = req.body
-     
+
 
     console.log(id)
     console.log('body', body)
@@ -98,7 +97,7 @@ router.put('/:id', async (req, res) => {
 
         const mascotaDB = await Mascota.findByIdAndUpdate(id, body, { useFindAndModify: false });
         console.log(mascotaDB)
-        
+
         res.json({
             estado: true,
             mensaje: 'Editado'
@@ -106,7 +105,7 @@ router.put('/:id', async (req, res) => {
 
     } catch (error) {
         console.log(error)
-        
+
         res.json({
             estado: false,
             mensaje: 'Falla'
