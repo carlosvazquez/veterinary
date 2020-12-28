@@ -13,6 +13,7 @@ router.get('/', async (req, res) => {
 
         res.render("mascotas", {
             arrayMascotas: arrayMascotasDB
+
         })
     } catch (error) {
         console.log(error)
