@@ -25,7 +25,7 @@ const dbname = 'veterinaria'
 const uri = `mongodb+srv://${user}:${password}@cluster0.r88xj.mongodb.net/${dbname}?retryWrites=true&w=majority`
 
 mongoose.connect(uri,
-  { useNewUrlParser: true, useUnifiedTopology: true }
+  { useNewUrlParser: true}
   )
   .then(() => console.log('Base de datos conectada'))
   .catch(e => console.log(e))
