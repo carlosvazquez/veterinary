@@ -24,9 +24,11 @@ const password = 'Q3rIiE5oY8nEHEtK';
 const dbname = 'veterinaria'
 const uri = `mongodb+srv://${user}:${password}@cluster0.r88xj.mongodb.net/${dbname}?retryWrites=true&w=majority`
 
-mongoose.connect('mongodb+srv://alfonsomartinez:Q3rIiE5oY8nEHEtK@cluster0.r88xj.mongodb.net/veterinaria?retryWrites=true&w=majority', {
-  useNewUrlParser: true
-});
+mongoose.connect(uri,
+  { useNewUrlParser: true, useUnifiedTopology: true }
+  )
+  .then(() => console.log('Base de datos conectada'))
+  .catch(e => console.log(e))
 
 //motor de plantillas
 app.set('view engine', 'ejs');
